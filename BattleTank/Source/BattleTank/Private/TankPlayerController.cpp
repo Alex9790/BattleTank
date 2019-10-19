@@ -39,7 +39,7 @@ void ATankPlayerController::AimTowardsCrosshair(){
 
     //se realiza un raytrace
     if(GetSightRayHitLocation(HitLocation)){    
-        UE_LOG(LogTemp, Warning, TEXT("HitLocation = %s."), *HitLocation.ToString()); 
+        //UE_LOG(LogTemp, Warning, TEXT("HitLocation = %s."), *HitLocation.ToString()); 
     }
 
     //Obtener la posicion mundo obtenido por el LineTrace a traves del Crosshair
@@ -50,11 +50,23 @@ void ATankPlayerController::AimTowardsCrosshair(){
 //Obtener la posicion mundo obtenido por el LineTrace a traves del Crosshair, true si coliciona con el Landscape
 bool ATankPlayerController::GetSightRayHitLocation(FVector& HitLocation) const {
 
-    HitLocation = FVector(1.0);
+    //Encontrar la posicion del crosshair, en coordenadas de pixel
+    int32 ViewportSizeX, ViewportSizeY;
+    GetViewportSize(ViewportSizeX, ViewportSizeY);
+    auto ScreenLocation = FVector2D(ViewportSizeX * CrosshairXLocation, ViewportSizeY * CrosshairYLocation);    //obteniendo la ubicacion del crosshair en pantalla
+    //UE_LOG(LogTemp, Warning, TEXT("ScreenLocation = %s."), *ScreenLocation.ToString()); 
+    
+    //"De-Project" la posicion de pantalla del crosshair a una direccion hacia el mundo
+    FVector CameraWorldLocation, LookDirection;
+    GetLookDirection(ScreenLocation, CameraWorldLocation, LookDirection);
+    UE_LOG(LogTemp, Warning, TEXT("WorldLocation = %s."), *CameraWorldLocation.ToString());
+    UE_LOG(LogTemp, Warning, TEXT("WorldDirection = %s."), *LookDirection.ToString());
+
+    //se realiza LineTrace a traves de esa direccion, y identificar contra que coliciona, dentro del rango definido
+
     return true;
-    /*if ()
-    {
-        return true;
-    }
-    return false;*/
+}
+
+bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector& CameraWorldLocation, FVector& LookDirection) const{
+    return DeprojectScreenPositionToWorld( ScreenLocation.X, ScreenLocation.Y, CameraWorldLocation, LookDirection);
 }
