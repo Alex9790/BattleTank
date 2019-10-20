@@ -16,14 +16,20 @@ public:
 	// Sets default values for this component's properties
 	UTankAimingComponent();
 
-protected:
-	// Called when the game starts
-	virtual void BeginPlay() override;
-
-public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	//recibe informacion de donde apuntar desde el Tank (Owner)
 	void AimAt(FVector HitLocation);
+
+	//metodo para setea Barrel
+	void SetBarrelReference(UStaticMeshComponent* BarrelToSet);
+
+protected:
+	// Called when the game starts
+	virtual void BeginPlay() override;
+
+private:
+	//referencia para el Barrel del Tank
+	UStaticMeshComponent* Barrel = nullptr;
 };
