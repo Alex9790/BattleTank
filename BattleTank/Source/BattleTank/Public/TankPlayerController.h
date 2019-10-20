@@ -33,5 +33,10 @@ class BATTLETANK_API ATankPlayerController : public APlayerController
 		UPROPERTY(EditAnywhere)
 		float CrosshairYLocation = 0.3333;
 
+		UPROPERTY(EditAnywhere)
+		float LineTraceRange = 1000000.0; //la distancia se mide en centimetros, 10km = 1000000cm
+
 		bool GetLookDirection(FVector2D ScreenLocation, FVector& CameraWorldLocation, FVector& LookDirection) const;
+
+		bool GetLookVectorHitLocation(FVector LookDirection, FVector& HitLocation) const;
 };

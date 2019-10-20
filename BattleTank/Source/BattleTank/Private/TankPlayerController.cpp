@@ -40,6 +40,8 @@ void ATankPlayerController::AimTowardsCrosshair(){
     //se realiza un raytrace
     if(GetSightRayHitLocation(HitLocation)){    
         //UE_LOG(LogTemp, Warning, TEXT("HitLocation = %s."), *HitLocation.ToString()); 
+        //se envia al tanque que se esta controlando la ubicacion hacia donde apuntar
+        GetControlledTank()->AimAt(HitLocation);
     }
 
     //Obtener la posicion mundo obtenido por el LineTrace a traves del Crosshair
@@ -58,13 +60,44 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& HitLocation) const {
     
     //"De-Project" la posicion de pantalla del crosshair a una direccion hacia el mundo
     FVector CameraWorldLocation, LookDirection;
-    GetLookDirection(ScreenLocation, CameraWorldLocation, LookDirection);
-    UE_LOG(LogTemp, Warning, TEXT("WorldLocation = %s."), *CameraWorldLocation.ToString());
-    UE_LOG(LogTemp, Warning, TEXT("WorldDirection = %s."), *LookDirection.ToString());
+    if(GetLookDirection(ScreenLocation, CameraWorldLocation, LookDirection)){
+        //UE_LOG(LogTemp, Warning, TEXT("WorldLocation = %s."), *CameraWorldLocation.ToString());
+        //UE_LOG(LogTemp, Warning, TEXT("WorldDirection = %s."), *LookDirection.ToString());
 
-    //se realiza LineTrace a traves de esa direccion, y identificar contra que coliciona, dentro del rango definido
+        //se realiza LineTrace a traves de esa direccion, y identificar contra que coliciona, dentro del rango definido
+        GetLookVectorHitLocation(LookDirection, HitLocation);
+        
+    }   
 
     return true;
+}
+
+bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVector& HitLocation) const{
+    FHitResult HitResult;
+    auto StartLocation = PlayerCameraManager->GetCameraLocation();
+    auto EndLocation = StartLocation + (LookDirection * LineTraceRange);
+    //UE_LOG(LogTemp, Warning, TEXT("StartLocation = %s."), *StartLocation.ToString());
+    /*LineTraceSingleByChannel
+    (
+        struct FHitResult & OutHit,                         //Primer objeto con el que colisiona
+        const FVector & Start,                              //inicio de la ubicacion del rayo
+        const FVector & End,                                //fin de la ubicacion del rayo
+        ECollisionChannel TraceChannel,                     //El "channel" en el que sta el objeto, usado para determinar cual componente detectar
+        const FCollisionQueryParams & Params,               //parametros adicionales
+        const FCollisionResponseParams & ResponseParam      //ResponseContainer a ser usado
+    )*/
+    if (GetWorld()->LineTraceSingleByChannel(
+        HitResult,
+        StartLocation,
+        EndLocation,
+        ECollisionChannel::ECC_Visibility       //colisionara con todo lo que se vea
+    ))
+    {
+        HitLocation = HitResult.Location;   //se obtiene del FHitResult la ubicacion en mundo donde ocurrio la colision
+        return true;
+    }
+    HitLocation = FVector(0);
+    return false;
 }
 
 bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector& CameraWorldLocation, FVector& LookDirection) const{

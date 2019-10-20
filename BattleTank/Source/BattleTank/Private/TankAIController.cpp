@@ -40,3 +40,13 @@ ATank* ATankAIController::GetControlledTank() const{
     return Cast<ATank>(GetPawn()); //retorna el Pawn que el cntrolador esta actualmente poseyendo y se castea como un Tanque
     
 }
+
+void ATankAIController::Tick(float DeltaTime){
+    Super::Tick(DeltaTime);
+    //no tiene sentido apuntar a la pantalla si no tienes control sobre un tanque
+    if(!GetControlledTank()){
+        return;
+    }
+    GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());
+
+}
