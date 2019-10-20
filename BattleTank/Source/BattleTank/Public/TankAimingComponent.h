@@ -26,6 +26,8 @@ public:
 	//metodo para setea Barrel
 	void SetBarrelReference(UStaticMeshComponent* BarrelToSet);
 
+	void MoveBarrelTowards(FVector AimDirection);
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
