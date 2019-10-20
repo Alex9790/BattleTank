@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
+#include "TankBarrel.h"
 #include "TankAimingComponent.h"
 
 // Sets default values for this component's properties
@@ -75,9 +76,11 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection){
 	UE_LOG(LogTemp, Warning, TEXT("TankAimingComponent - Apuntando en: %s"), *AimDirection.ToString());
 
 	//mover el Barrel la cantidad justa por frame
+	Barrel->Elevate(5);
+
 	//dada una maxima velocidad de elevacion y tiempo por frame
 }
 
-void UTankAimingComponent::SetBarrelReference(UStaticMeshComponent* BarrelToSet){
+void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet){
 	Barrel = BarrelToSet;
 }
