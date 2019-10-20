@@ -73,7 +73,7 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection){
 	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
 	auto AimAsRotator = AimDirection.Rotation();
 	auto DeltaRotator = AimAsRotator - BarrelRotator;
-	UE_LOG(LogTemp, Warning, TEXT("TankAimingComponent - Apuntando en: %s"), *AimDirection.ToString());
+	//UE_LOG(LogTemp, Warning, TEXT("TankAimingComponent - Apuntando en: %s"), *AimDirection.ToString());
 
 	//mover el Barrel la cantidad justa por frame
 	Barrel->Elevate(5);
