@@ -53,9 +53,9 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed){
 								StartLocation,											//FVector StartLocation
 								HitLocation,											//FVector EndLocation
 								LaunchSpeed,											//float TossSpeed
-																						//bool bHighArc, default = false
-																						//float CollisionRadius, default = 0 //creo que s lo que altera el resultado final de las balas
-																						//float OverrideGravityZ, default 0 0
+								false,														//bool bHighArc, default = false
+								0,														//float CollisionRadius, default = 0 //creo que s lo que altera el resultado final de las balas
+								0,														//float OverrideGravityZ, default 0 0
 								ESuggestProjVelocityTraceOption::DoNotTrace				//ESuggestProjVelocityTraceOption::Type TraceOption,
 																						//const FCollisionResponseParams & ResponseParam,
 																						//const TArray< AActor * > & ActorsToIgnore,
