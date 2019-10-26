@@ -4,12 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "Components/StaticMeshComponent.h"
+#include "Math/UnrealMathUtility.h"
 #include "TankBarrel.generated.h"
 
 /**
  * Contiene las Propiedades del Barrel y metodo Elevate
  */
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), hidecategories = ("Collision") )
+UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent)/*, hidecategories = ("Collision") */)
 class BATTLETANK_API UTankBarrel : public UStaticMeshComponent
 {
 	GENERATED_BODY()
