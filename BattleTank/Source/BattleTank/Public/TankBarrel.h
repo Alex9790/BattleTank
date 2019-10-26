@@ -9,13 +9,14 @@
 /**
  * Contiene las Propiedades del Barrel y metodo Elevate
  */
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), hidecategories = ("Collision") )
 class BATTLETANK_API UTankBarrel : public UStaticMeshComponent
 {
 	GENERATED_BODY()
 	
 public:
-	void Elevate(float DegreesPerSecond);
+	//RelativeSpeed - -1 la minima altura que puede alcanzar, 1 la maxima altura que puede alcanzar
+	void Elevate(float RelativeSpeed);
 
 private:
 	UPROPERTY(EditAnywhere, Category = Setup)
