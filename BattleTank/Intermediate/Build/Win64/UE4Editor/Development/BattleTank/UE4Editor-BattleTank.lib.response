@@ -8,6 +8,7 @@
 /NODEFAULTLIB
 "D:\Proyectos UE4\BattleTank\BattleTank\Intermediate\Build\Win64\BattleTankEditor\Development\Engine\SharedPCH.Engine.h.obj"
 "D:\Proyectos UE4\BattleTank\BattleTank\Intermediate\Build\Win64\UE4Editor\Development\BattleTank\MyPlayerController.cpp.obj"
+"D:\Proyectos UE4\BattleTank\BattleTank\Intermediate\Build\Win64\UE4Editor\Development\BattleTank\Projectile.cpp.obj"
 "D:\Proyectos UE4\BattleTank\BattleTank\Intermediate\Build\Win64\UE4Editor\Development\BattleTank\Tank.cpp.obj"
 "D:\Proyectos UE4\BattleTank\BattleTank\Intermediate\Build\Win64\UE4Editor\Development\BattleTank\TankAIController.cpp.obj"
 "D:\Proyectos UE4\BattleTank\BattleTank\Intermediate\Build\Win64\UE4Editor\Development\BattleTank\TankAimingComponent.cpp.obj"
@@ -19,6 +20,7 @@
 "D:\Proyectos UE4\BattleTank\BattleTank\Intermediate\Build\Win64\UE4Editor\Development\BattleTank\BattleTank.init.gen.cpp.obj"
 "D:\Proyectos UE4\BattleTank\BattleTank\Intermediate\Build\Win64\UE4Editor\Development\BattleTank\BattleTankGameModeBase.gen.cpp.obj"
 "D:\Proyectos UE4\BattleTank\BattleTank\Intermediate\Build\Win64\UE4Editor\Development\BattleTank\MyPlayerController.gen.cpp.obj"
+"D:\Proyectos UE4\BattleTank\BattleTank\Intermediate\Build\Win64\UE4Editor\Development\BattleTank\Projectile.gen.cpp.obj"
 "D:\Proyectos UE4\BattleTank\BattleTank\Intermediate\Build\Win64\UE4Editor\Development\BattleTank\Tank.gen.cpp.obj"
 "D:\Proyectos UE4\BattleTank\BattleTank\Intermediate\Build\Win64\UE4Editor\Development\BattleTank\TankAIController.gen.cpp.obj"
 "D:\Proyectos UE4\BattleTank\BattleTank\Intermediate\Build\Win64\UE4Editor\Development\BattleTank\TankAimingComponent.gen.cpp.obj"

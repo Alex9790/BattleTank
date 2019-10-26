@@ -68,7 +68,7 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed){
 		MoveBarrelTowards(AimDirection);
 	}else{
 		auto Time = GetWorld()->GetTimeSeconds();
-    	UE_LOG(LogTemp, Warning, TEXT("%f: No se encontró Solución."), Time);
+    	//UE_LOG(LogTemp, Warning, TEXT("%f: No se encontró Solución."), Time);
 	}
 }
 
@@ -77,7 +77,7 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection){
 	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
 	auto AimAsRotator = AimDirection.Rotation();
 	auto DeltaRotator = AimAsRotator - BarrelRotator;
-	UE_LOG(LogTemp, Warning, TEXT("TankAimingComponent - Apuntando en: %s"), *AimDirection.ToString());
+	//UE_LOG(LogTemp, Warning, TEXT("TankAimingComponent - Apuntando en: %s"), *AimDirection.ToString());
 
 	//dada una maxima velocidad de elevacion y tiempo por frame
 	//mover el Barrel la cantidad justa por frame

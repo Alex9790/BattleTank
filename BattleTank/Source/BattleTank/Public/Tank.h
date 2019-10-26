@@ -43,5 +43,7 @@ public:
 	UPROPERTY(EditAnywhere, Category = Firing)
 	float LaunchSpeed = 100000; //velocidad de 1000 m/s = 100000 cm/s - Valor por defecto, el diseñador los escogera cuando llegu ele momento
 
-
+	//Metodo que se encarga de disparar proyectles
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void Fire();
 };
