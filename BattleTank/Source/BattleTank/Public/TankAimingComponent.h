@@ -8,7 +8,8 @@
 #include "TankAimingComponent.generated.h"
 
 //Forward Declaration
-class UTankBarrel; 
+class UTankBarrel;
+class UTankTurret;
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BATTLETANK_API UTankAimingComponent : public UActorComponent
@@ -25,10 +26,13 @@ public:
 	//recibe informacion de donde apuntar desde el Tank (Owner)
 	void AimAt(FVector HitLocation, float LaunchSpeed);
 
-	//metodo para setea Barrel
+	//metodo para setear Barrel
 	void SetBarrelReference(UTankBarrel* BarrelToSet);
 
 	void MoveBarrelTowards(FVector AimDirection);
+
+	//metodo para setear Turret
+	void SetTurretReference(UTankTurret* TurretToSet);
 
 protected:
 	// Called when the game starts
@@ -38,4 +42,5 @@ private:
 	//referencia para el Barrel del Tank
 	//UStaticMeshComponent* Barrel = nullptr;
 	UTankBarrel* Barrel = nullptr;
+	UTankTurret* Turret = nullptr;
 };

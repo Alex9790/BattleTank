@@ -8,6 +8,7 @@
 
 class UTankBarrel; //Forward Declaration
 class UTankAimingComponent;
+class UTankTurret;
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
@@ -35,6 +36,9 @@ public:
 public:
 	UFUNCTION(BlueprintCallable, Category = Setup)	//define a un metodo que se puede llamar desde un BluePrint
 	void SetBarrelReference(UTankBarrel* BarrelToSet);
+
+	UFUNCTION(BlueprintCallable, Category = Setup)	//define a un metodo que se puede llamar desde un BluePrint
+	void SetTurretReference(UTankTurret* TurretToSet);
 
 	UPROPERTY(EditAnywhere, Category = Firing)
 	float LaunchSpeed = 100000; //velocidad de 1000 m/s = 100000 cm/s - Valor por defecto, el diseñador los escogera cuando llegu ele momento
