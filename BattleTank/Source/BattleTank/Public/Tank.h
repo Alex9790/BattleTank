@@ -9,6 +9,7 @@
 class UTankBarrel; //Forward Declaration
 class UTankAimingComponent;
 class UTankTurret;
+class AProjectile;
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
@@ -33,7 +34,11 @@ public:
 	// Sets default values for this pawn's properties
 	ATank();
 
-public:
+	//Metodo que se encarga de disparar proyectles
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void Fire();
+
+private:
 	UFUNCTION(BlueprintCallable, Category = Setup)	//define a un metodo que se puede llamar desde un BluePrint
 	void SetBarrelReference(UTankBarrel* BarrelToSet);
 
@@ -41,9 +46,12 @@ public:
 	void SetTurretReference(UTankTurret* TurretToSet);
 
 	UPROPERTY(EditAnywhere, Category = Firing)
-	float LaunchSpeed = 100000; //velocidad de 1000 m/s = 100000 cm/s - Valor por defecto, el diseñador los escogera cuando llegu ele momento
+	float LaunchSpeed = 100000; //velocidad de 1000 m/s = 100000 cm/s - Valor por defecto, el diseñador los escogera cuando llegu ele momento	
 
-	//Metodo que se encarga de disparar proyectles
-	UFUNCTION(BlueprintCallable, Category = Setup)
-	void Fire();
+	UPROPERTY(EditAnywhere, Category = Firing)
+	TSubclassOf<AProjectile> ProjectileBlueprint;	//Alternativa: UClass* ProjectileBlueprint
+
+	//Referencia local del barrel para generar proyectiles
+	UTankBarrel* Barrel = nullptr;
+
 };
