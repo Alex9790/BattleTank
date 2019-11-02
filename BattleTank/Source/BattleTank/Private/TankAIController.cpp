@@ -9,7 +9,7 @@ void ATankAIController::BeginPlay(){
     UE_LOG(LogTemp, Warning, TEXT("ATankAIController BeginPlay"));
 
     //identifica el tanque que este AI Controller esta controlando
-    auto ControlledTank = GetControlledTank();
+    ControlledTank = Cast<ATank>(GetPawn());
     if (!ControlledTank)
     {
         UE_LOG(LogTemp, Error, TEXT("ATankAIController No posee tanque."));
@@ -18,7 +18,7 @@ void ATankAIController::BeginPlay(){
     }
 
     //identifica el tanque que controla el jugador en el mundo
-    auto PlayerTank = GetPlayerTank();
+    PlayerTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
     if (!PlayerTank)
     {
         UE_LOG(LogTemp, Error, TEXT("ATankAIController No encuentra jugador."));
@@ -28,26 +28,19 @@ void ATankAIController::BeginPlay(){
     
 }
 
-ATank* ATankAIController::GetPlayerTank() const{
-    //se hace de esta forma porque castear null como ATank generara una exception
-    auto PlayerPawn = GetWorld()->GetFirstPlayerController()->GetPawn();
-    if(!PlayerPawn){
-        return nullptr;
-    }
-    return Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
-}
-
-ATank* ATankAIController::GetControlledTank() const{
-    return Cast<ATank>(GetPawn()); //retorna el Pawn que el cntrolador esta actualmente poseyendo y se castea como un Tanque
-    
-}
-
 void ATankAIController::Tick(float DeltaTime){
     Super::Tick(DeltaTime);
+    
+    //auto ControlledTank = Cast<ATank>(GetPawn()); //retorna el Pawn que el cntrolador esta actualmente poseyendo y se castea como un Tanque
+    
     //no tiene sentido apuntar a la pantalla si no tienes control sobre un tanque
-    if(!GetControlledTank()){
+    if(!ControlledTank){
         return;
     }
-    GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());
 
+    //apuntar al tanque del jugador
+    ControlledTank->AimAt(PlayerTank->GetActorLocation());
+
+    //disparar al juador
+    ControlledTank->Fire();
 }

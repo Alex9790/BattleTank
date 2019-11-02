@@ -67,7 +67,7 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed){
 		//UE_LOG(LogTemp, Warning, TEXT("TankAimingComponent - Apuntando en: %s"), *AimDirection.ToString());
 		MoveBarrelTowards(AimDirection);
 	}else{
-		auto Time = GetWorld()->GetTimeSeconds();
+		//auto Time = GetWorld()->GetTimeSeconds();
     	//UE_LOG(LogTemp, Warning, TEXT("%f: No se encontró Solución."), Time);
 	}
 }

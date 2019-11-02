@@ -54,4 +54,8 @@ private:
 	//Referencia local del barrel para generar proyectiles
 	UTankBarrel* Barrel = nullptr;
 
+	//tiempo delay entre disparos
+	float ReloadTimeInSeconds = 3;
+	double LastFireTime = 0;
+
 };
