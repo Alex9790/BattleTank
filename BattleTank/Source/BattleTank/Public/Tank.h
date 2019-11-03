@@ -55,6 +55,7 @@ private:
 	UTankBarrel* Barrel = nullptr;
 
 	//tiempo delay entre disparos
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
 	float ReloadTimeInSeconds = 3;
 	double LastFireTime = 0;
 
