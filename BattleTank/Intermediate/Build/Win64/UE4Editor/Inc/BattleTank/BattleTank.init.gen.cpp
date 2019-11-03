@@ -21,7 +21,7 @@ void EmptyLinkFunctionForGeneratedCodeBattleTank_init() {}
 				nullptr,
 				0,
 				PKG_CompiledIn | 0x00000000,
-				0x687202DD,
+				0x9806C762,
 				0x9FCF6DF9,
 				METADATA_PARAMS(nullptr, 0)
 			};

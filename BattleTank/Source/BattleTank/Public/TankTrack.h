@@ -18,4 +18,8 @@ public:
 	//define el Throttle
 	UFUNCTION(BlueprintCallable, Category = Input)	//define a un metodo que se puede llamar desde un BluePrint
 	void SetThrottle(float Throttle);
+
+	//velocidad maxima
+	UPROPERTY(EditDefaultsOnly)
+	float TrackMaxDrivingForce = 400000; //se asume Tank pesa 40tons, 1g de aceleracion 
 };
