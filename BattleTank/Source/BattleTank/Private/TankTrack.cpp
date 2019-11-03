@@ -4,9 +4,9 @@
 #include "TankTrack.h"
 
 void UTankTrack::SetThrottle(float Throttle){
-    auto Time = GetWorld()->GetTimeSeconds();
-    auto Name = GetName();
-    UE_LOG(LogTemp, Warning, TEXT("%f: %s Throttle: %f"), Time, *Name, Throttle);
+    //auto Time = GetWorld()->GetTimeSeconds();
+    //auto Name = GetName();
+    //UE_LOG(LogTemp, Warning, TEXT("%f: %s Throttle: %f"), Time, *Name, Throttle);
 
     //se define la fuerza aplicada para moverse
     auto ForceApplied = GetForwardVector() * Throttle * TrackMaxDrivingForce;
