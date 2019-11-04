@@ -6,6 +6,8 @@
 #include "GameFramework/NavMovementComponent.h"
 #include "TankMovementComponent.generated.h"
 
+class UTankTrack;
+
 /**
  * Clase para gestionar el movimiento del Tanque para las AI
  */
@@ -15,7 +17,13 @@ class BATTLETANK_API UTankMovementComponent : public UNavMovementComponent
 	GENERATED_BODY()
 	
 public:
-	UFUNCTION(BlueprintCallable, Category = Setup)	//define a un metodo que se puede llamar desde un BluePrint
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void Initialise(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSer);
+
+	UFUNCTION(BlueprintCallable, Category = Input)	//define a un metodo que se puede llamar desde un BluePrint
 	void IntendMoveForward(float Throw);
 
+private:
+	UTankTrack* LeftTrack = nullptr;
+	UTankTrack* RightTrack = nullptr;
 };
