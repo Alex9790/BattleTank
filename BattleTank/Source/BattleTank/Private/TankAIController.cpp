@@ -31,16 +31,17 @@ void ATankAIController::BeginPlay(){
 void ATankAIController::Tick(float DeltaTime){
     Super::Tick(DeltaTime);
     
-    //auto ControlledTank = Cast<ATank>(GetPawn()); //retorna el Pawn que el cntrolador esta actualmente poseyendo y se castea como un Tanque
-    
-    //no tiene sentido apuntar a la pantalla si no tienes control sobre un tanque
-    if(!ControlledTank){
-        return;
-    }
+    auto PlayerTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
+	auto ControlledTank = Cast<ATank>(GetPawn());
 
-    //apuntar al tanque del jugador
-    ControlledTank->AimAt(PlayerTank->GetActorLocation());
+	if (PlayerTank)
+	{
+		// Move towards the player
+		MoveToActor(PlayerTank, AcceptanceRadius); // TODO check radius is in cm
 
-    //disparar al juador
-    ControlledTank->Fire();
+		// Aim towards the player
+		ControlledTank->AimAt(PlayerTank->GetActorLocation());
+
+		ControlledTank->Fire(); // TODO limit firing rate
+	}
 }
