@@ -13,16 +13,24 @@ void UTankMovementComponent::Initialise(UTankTrack* LeftTrackToSet, UTankTrack* 
 void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed)
 {
 	// No need to call Super as we're replacing the functionality
-	auto TankName = GetOwner()->GetName();
+	//auto TankName = GetOwner()->GetName();
+    //UE_LOG(LogTemp, Warning, TEXT("%s vectoring to %s"), *TankName, *MoveVelocityString)
+    //vector direccion hacia el objetivo
 	auto AIForwardIntention = MoveVelocity.GetSafeNormal();
-	//UE_LOG(LogTemp, Warning, TEXT("%s vectoring to %s"), *TankName, *MoveVelocityString)
-
     //vector que contiene la direccion en la que el tanque apunta hacia adelante
     auto TankForward = GetOwner()->GetActorForwardVector().GetSafeNormal();
-
-    auto ForwardThrow = FVector::DotProduct(TankForward, AIForwardIntention);
-    
+	
+    auto ForwardThrow = FVector::DotProduct(TankForward, AIForwardIntention);   
     IntendMoveForward(ForwardThrow*4);
+
+    auto GirarThrow = FVector::CrossProduct(TankForward, AIForwardIntention).Z;
+    //UE_LOG(LogTemp, Warning, TEXT("GirarThrow %f"), GirarThrow);
+    IntendTurnRight(GirarThrow*3);
+    /*if(GirarThrow > 0){
+        IntendTurnRight(GirarThrow*4);
+    }else{
+        IntendTurnLeft(GirarThrow*4);
+    }*/
 }
 
 void UTankMovementComponent::IntendMoveForward(float Throw){
