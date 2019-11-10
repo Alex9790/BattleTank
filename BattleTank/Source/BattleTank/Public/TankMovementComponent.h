@@ -29,7 +29,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Input)	//define a un metodo que se puede llamar desde un BluePrint
 	void IntendTurnLeft(float Throw);
 
-	// TODO check best protection
+	// metodo llamado por el AI Pathfinding en TankAIController
 	virtual void RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) override;
 
 private:
