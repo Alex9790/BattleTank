@@ -8,7 +8,6 @@
 
 class UTankBarrel; //Forward Declaration
 class UTankAimingComponent;
-class UTankMovementComponent;
 class UTankTurret;
 class AProjectile;
 
@@ -44,20 +43,11 @@ public:
 	void Fire();
 
 private:
-	UFUNCTION(BlueprintCallable, Category = Setup)	//define a un metodo que se puede llamar desde un BluePrint
-	void SetBarrelReference(UTankBarrel* BarrelToSet);
-
-	UFUNCTION(BlueprintCallable, Category = Setup)	//define a un metodo que se puede llamar desde un BluePrint
-	void SetTurretReference(UTankTurret* TurretToSet);
-
 	UPROPERTY(EditAnywhere, Category = Firing)
 	float LaunchSpeed = 100000; //velocidad de 1000 m/s = 100000 cm/s - Valor por defecto, el diseñador los escogera cuando llegu ele momento	
 
 	UPROPERTY(EditAnywhere, Category = Firing)
 	TSubclassOf<AProjectile> ProjectileBlueprint;	//Alternativa: UClass* ProjectileBlueprint
-
-	//Referencia local del barrel para generar proyectiles
-	UTankBarrel* Barrel = nullptr;
 
 	//tiempo delay entre disparos
 	UPROPERTY(EditDefaultsOnly, Category = Firing)

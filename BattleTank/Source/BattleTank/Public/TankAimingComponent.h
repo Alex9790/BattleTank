@@ -34,13 +34,10 @@ public:
 	//recibe informacion de donde apuntar desde el Tank (Owner)
 	void AimAt(FVector HitLocation, float LaunchSpeed);
 
-	//metodo para setear Barrel
-	void SetBarrelReference(UTankBarrel* BarrelToSet);
-
 	void MoveBarrelTowards(FVector AimDirection);
 
-	//metodo para setear Turret
-	void SetTurretReference(UTankTurret* TurretToSet);
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
 
 protected:
 	// Called when the game starts
