@@ -7,6 +7,14 @@
 #include "Classes/Kismet/GameplayStatics.h"
 #include "TankAimingComponent.generated.h"
 
+//enum para identificar el estado del componente
+UENUM()
+enum class EFiringState : uint8{
+	Reloading,
+	Aiming,
+	Locked
+};
+
 //Forward Declaration
 class UTankBarrel;
 class UTankTurret;
@@ -38,9 +46,14 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
+	//definiendo variable Enum / Protected porque necesitamos acceder desde una subclase
+	UPROPERTY(BlueprintReadOnly, Category = "State")
+	EFiringState FiringState = EFiringState::Reloading;
+
 private:
 	//referencia para el Barrel del Tank
 	//UStaticMeshComponent* Barrel = nullptr;
 	UTankBarrel* Barrel = nullptr;
 	UTankTurret* Turret = nullptr;
+
 };

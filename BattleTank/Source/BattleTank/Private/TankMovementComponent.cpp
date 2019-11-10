@@ -21,7 +21,7 @@ void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool
     auto TankForward = GetOwner()->GetActorForwardVector().GetSafeNormal();
 	
     auto ForwardThrow = FVector::DotProduct(TankForward, AIForwardIntention);   
-    IntendMoveForward(ForwardThrow*4);
+    IntendMoveForward(ForwardThrow*3);
 
     auto GirarThrow = FVector::CrossProduct(TankForward, AIForwardIntention).Z;
     //UE_LOG(LogTemp, Warning, TEXT("GirarThrow %f"), GirarThrow);
