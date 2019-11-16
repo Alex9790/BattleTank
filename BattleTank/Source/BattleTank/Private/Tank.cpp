@@ -47,7 +47,7 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 }
 
 void ATank::AimAt(FVector HitLocation){	
-	if(!TankAimingComponent){return;}
+	if(!ensure(TankAimingComponent)){return;}
 	//auto OurTankName = GetName();
 	//UE_LOG(LogTemp, Warning, TEXT("ScreenLocation = %s."), *ScreenLocation.ToString()); 
 	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
@@ -55,12 +55,13 @@ void ATank::AimAt(FVector HitLocation){
 
 void ATank::Fire(){
 
+	if(!ensure(Barrel)){return;}
+
 	bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
 
 	//UE_LOG(LogTemp, Warning, TEXT("Firing."));
 
-	if(Barrel && isReloaded){
-
+	if(isReloaded){
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(
 			ProjectileBlueprint,
 			Barrel->GetSocketLocation(FName("Projectile")),

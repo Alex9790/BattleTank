@@ -10,7 +10,7 @@ void ATankPlayerController::BeginPlay(){
     UE_LOG(LogTemp, Warning, TEXT("TankPlayerController BeginPlay"));
 
     auto ControlledTank = GetControlledTank();
-    if (!ControlledTank)
+    if (!ensure(ControlledTank))
     {
         UE_LOG(LogTemp, Error, TEXT("TankPlayerController No posee tanque."));
     }else{
@@ -40,7 +40,7 @@ ATank* ATankPlayerController::GetControlledTank() const{
 
 void ATankPlayerController::AimTowardsCrosshair(){
     //no tiene sentido apuntar a la pantalla si no tienes control sobre un tanque
-    if(!GetControlledTank()){
+    if(!ensure(GetControlledTank())){
         return;
     }
 

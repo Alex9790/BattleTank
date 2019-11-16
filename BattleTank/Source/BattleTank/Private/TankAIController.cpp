@@ -10,7 +10,7 @@ void ATankAIController::BeginPlay(){
 
     //identifica el tanque que este AI Controller esta controlando
     ControlledTank = Cast<ATank>(GetPawn());
-    if (!ControlledTank)
+    if (!ensure(ControlledTank))
     {
         UE_LOG(LogTemp, Error, TEXT("ATankAIController No posee tanque."));
     }else{
@@ -19,7 +19,7 @@ void ATankAIController::BeginPlay(){
 
     //identifica el tanque que controla el jugador en el mundo
     PlayerTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
-    if (!PlayerTank)
+    if (!ensure(PlayerTank))
     {
         UE_LOG(LogTemp, Error, TEXT("ATankAIController No encuentra jugador."));
     }else{
@@ -34,8 +34,7 @@ void ATankAIController::Tick(float DeltaTime){
     auto PlayerTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
 	auto ControlledTank = Cast<ATank>(GetPawn());
 
-	if (PlayerTank)
-	{
+	if (ensure(PlayerTank)){        
 		// Move towards the player
 		MoveToActor(PlayerTank, AcceptanceRadius); // TODO check radius is in cm
 
