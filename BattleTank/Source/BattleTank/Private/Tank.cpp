@@ -17,6 +17,10 @@ ATank::ATank()
 	// No need to protect points as added at construction
 	//TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
 	//TankMovementComponent = CreateDefaultSubobject<UTankMovementComponent>(FName("Movement Component"));
+
+	//log para identificar cuando se crea el Tank
+	auto TankName = GetName();
+	UE_LOG(LogTemp, Warning, TEXT("Constructor - TankName = %s"), *TankName)
 }
 
 // Called when the game starts or when spawned
