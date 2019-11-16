@@ -45,7 +45,7 @@ protected:
 
 	//definiendo variable Enum / Protected porque necesitamos acceder desde una subclase
 	UPROPERTY(BlueprintReadOnly, Category = "State")
-	EFiringState FiringState = EFiringState::Reloading;
+	EFiringState FiringState = EFiringState::Aiming;
 
 private:
 	//referencia para el Barrel del Tank

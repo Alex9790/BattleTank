@@ -28,6 +28,8 @@ void ATank::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	auto TankName = GetName();
+	UE_LOG(LogTemp, Warning, TEXT("BeginPlay - TankName = %s"), *TankName)
 }
 
 // Called every frame
