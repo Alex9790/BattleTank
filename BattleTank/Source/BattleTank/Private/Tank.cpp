@@ -30,6 +30,9 @@ void ATank::BeginPlay()
 	
 	auto TankName = GetName();
 	UE_LOG(LogTemp, Warning, TEXT("BeginPlay - TankName = %s"), *TankName)
+
+	//Encontrar referencia a AimingComponent antes de Refactor
+	TankAimingComponent = FindComponentByClass<UTankAimingComponent>();
 }
 
 // Called every frame
