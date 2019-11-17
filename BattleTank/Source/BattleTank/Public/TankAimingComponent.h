@@ -44,6 +44,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void Fire();
 
+	bool IsBarrelMoving();
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
@@ -68,5 +70,7 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = Firing)
 	float ReloadTimeInSeconds = 3;
 	double LastFireTime = 0;
+
+	FVector AimDirection;
 
 };
