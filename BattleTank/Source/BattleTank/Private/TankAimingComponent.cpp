@@ -11,7 +11,7 @@ UTankAimingComponent::UTankAimingComponent()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
-	PrimaryComponentTick.bCanEverTick = false;
+	PrimaryComponentTick.bCanEverTick = true;
 
 	// ...
 }
@@ -22,8 +22,8 @@ void UTankAimingComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
-	
+	//para agregar un primer Reload
+	LastFireTime = FPlatformTime::Seconds();
 }
 
 
@@ -32,7 +32,10 @@ void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	// ...
+	//se agrega logica para cambiar de color el Crosshair segun su estado
+	if((FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds){
+		FiringState = EFiringState::Reloading;
+	}
 }
 
 void UTankAimingComponent::Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet){
@@ -99,13 +102,9 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection){
 
 void UTankAimingComponent::Fire(){
 
-	if(!ensure(Barrel && ProjectileBlueprint)){return;}
+	if(!ensure(Barrel) && !ensure(ProjectileBlueprint)){return;}
 
-	bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
-
-	//UE_LOG(LogTemp, Warning, TEXT("Firing."));
-
-	if(isReloaded){
+	if(FiringState != EFiringState::Reloading){
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(
 			ProjectileBlueprint,
 			Barrel->GetSocketLocation(FName("Projectile")),
