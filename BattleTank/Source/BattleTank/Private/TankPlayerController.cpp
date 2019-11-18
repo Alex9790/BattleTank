@@ -25,16 +25,17 @@ void ATankPlayerController::Tick(float DeltaTime){
 }
 
 void ATankPlayerController::AimTowardsCrosshair(){
+    if(!GetPawn()){return;}
     //se busca el componente AimingComponent del Pawn(Tank) que se esta poseyendo
-    auto AutoComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
-    if(!ensure(AutoComponent)){return;}
+    auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
+    if(!ensure(AimingComponent)){return;}
 
     FVector HitLocation;    //Out Parameter    
 
     //se realiza un raytrace
     if(GetSightRayHitLocation(HitLocation)){            
         //se envia al componente Aiming del Tank que se esta controlando la ubicacion hacia donde apuntar
-        AutoComponent->AimAt(HitLocation);
+        AimingComponent->AimAt(HitLocation);
     }
 
 }
