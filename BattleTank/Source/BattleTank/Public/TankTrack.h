@@ -26,4 +26,8 @@ public:
 	//velocidad maxima
 	UPROPERTY(EditDefaultsOnly)
 	float TrackMaxDrivingForce = 400000; //se asume Tank pesa 40tons, 1g de aceleracion 
+
+private:
+	UFUNCTION()
+	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
 };

@@ -11,6 +11,7 @@ UTankTrack::UTankTrack(){
 void UTankTrack::BeginPlay()
 {
 	Super::BeginPlay();
+	OnComponentHit.AddDynamic(this, &UTankTrack::OnHit);
 }
 
 
@@ -45,4 +46,8 @@ void UTankTrack::SetThrottle(float Throttle){
     //se aplica la fuerza calculada
     TankRoot->AddForceAtLocation(ForceApplied, ForceLocation);
 
+}
+
+void UTankTrack::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit) {
+	UE_LOG(LogTemp, Warning, TEXT("Hit"));
 }
