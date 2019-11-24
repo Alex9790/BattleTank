@@ -56,11 +56,10 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& HitLocation) const {
         //UE_LOG(LogTemp, Warning, TEXT("WorldDirection = %s."), *LookDirection.ToString());
 
         //se realiza LineTrace a traves de esa direccion, y identificar contra que coliciona, dentro del rango definido
-        GetLookVectorHitLocation(LookDirection, HitLocation);
-        
+        return GetLookVectorHitLocation(LookDirection, HitLocation);    
     }   
 
-    return true;
+    return false;
 }
 
 bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVector& HitLocation) const{
