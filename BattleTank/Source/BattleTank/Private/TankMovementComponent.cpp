@@ -25,7 +25,7 @@ void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool
 
     auto GirarThrow = FVector::CrossProduct(TankForward, AIForwardIntention).Z;
     //UE_LOG(LogTemp, Warning, TEXT("GirarThrow %f"), GirarThrow);
-    IntendTurnRight(GirarThrow*3);
+    IntendTurnRight(GirarThrow*5);
     /*if(GirarThrow > 0){
         IntendTurnRight(GirarThrow*4);
     }else{

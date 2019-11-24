@@ -48,6 +48,11 @@ bool UTankAimingComponent::IsBarrelMoving(){
 	return !BarrelForward.Equals(AimDirection, 0.01);
 }
 
+EFiringState UTankAimingComponent::GetFiringState() const
+{
+	return FiringState;
+}
+
 void UTankAimingComponent::Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet){
     if(!ensure(BarrelToSet || TurretToSet)){return;}
     

@@ -19,7 +19,8 @@ class BATTLETANK_API ATankAIController : public AAIController
 
 		virtual void Tick(float DeltaTime) override;		 
 
-private: 
+protected: 
 	//que tan cerca se puede acercar el AI al jugador (en centimetros)
-	float AcceptanceRadius = 3000;
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+	float AcceptanceRadius = 10000;
 };
