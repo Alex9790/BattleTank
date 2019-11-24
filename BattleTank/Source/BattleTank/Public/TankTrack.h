@@ -19,9 +19,13 @@ public:
 	virtual void BeginPlay() override;
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
+	void ApplySidewaysForce();
+
 	//define el Throttle
 	UFUNCTION(BlueprintCallable, Category = Input)	//define a un metodo que se puede llamar desde un BluePrint
 	void SetThrottle(float Throttle);
+
+	void DriveTrack();
 
 	//velocidad maxima
 	UPROPERTY(EditDefaultsOnly)
@@ -30,4 +34,6 @@ public:
 private:
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
+
+	float CurrentThrottle = 0;
 };
