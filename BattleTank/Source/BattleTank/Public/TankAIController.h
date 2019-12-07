@@ -22,5 +22,5 @@ class BATTLETANK_API ATankAIController : public AAIController
 protected: 
 	//que tan cerca se puede acercar el AI al jugador (en centimetros)
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
-	float AcceptanceRadius = 10000;
+	float AcceptanceRadius = 5000;
 };

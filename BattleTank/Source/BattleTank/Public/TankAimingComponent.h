@@ -12,7 +12,8 @@ UENUM()
 enum class EFiringState : uint8{
 	Reloading,
 	Aiming,
-	Locked
+	Locked,
+	OutOfAmmo
 };
 
 //Forward Declaration
@@ -41,12 +42,15 @@ public:
 	void Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
 
 	//Metodo que se encarga de disparar proyectles
-	UFUNCTION(BlueprintCallable, Category = Setup)
+	UFUNCTION(BlueprintCallable, Category = "Firing")
 	void Fire();
 
 	bool IsBarrelMoving();
 
 	EFiringState GetFiringState() const;
+
+	UFUNCTION(BlueprintCallable, Category = "Firing")
+	int GetRoundsLeft() const;
 
 protected:
 	// Called when the game starts
@@ -74,5 +78,8 @@ private:
 	double LastFireTime = 0;
 
 	FVector AimDirection;
+
+	//Ammo restante
+	int RoundsLeft = 3; 
 
 };

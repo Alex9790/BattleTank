@@ -33,7 +33,9 @@ void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	//se agrega logica para cambiar de color el Crosshair segun su estado
-	if((FPlatformTime::Seconds() - LastFireTime) < ReloadTimeInSeconds){
+	if(RoundsLeft <= 0){
+		FiringState = EFiringState::OutOfAmmo;
+	}else if((FPlatformTime::Seconds() - LastFireTime) < ReloadTimeInSeconds){
 		FiringState = EFiringState::Reloading;
 	}else if(IsBarrelMoving()){
 		FiringState = EFiringState::Aiming;
@@ -51,6 +53,11 @@ bool UTankAimingComponent::IsBarrelMoving(){
 EFiringState UTankAimingComponent::GetFiringState() const
 {
 	return FiringState;
+}
+
+int UTankAimingComponent::GetRoundsLeft() const
+{
+	return RoundsLeft;
 }
 
 void UTankAimingComponent::Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet){
@@ -125,7 +132,7 @@ void UTankAimingComponent::Fire(){
 
 	if(!ensure(Barrel) && !ensure(ProjectileBlueprint)){return;}
 
-	if(FiringState != EFiringState::Reloading){
+	if(FiringState == EFiringState::Aiming || FiringState == EFiringState::Locked){
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(
 			ProjectileBlueprint,
 			Barrel->GetSocketLocation(FName("Projectile")),
@@ -135,5 +142,7 @@ void UTankAimingComponent::Fire(){
 		Projectile->LaunchProjectile(LaunchSpeed);
 
 		LastFireTime = FPlatformTime::Seconds();
+
+		RoundsLeft--;
 	}
 }

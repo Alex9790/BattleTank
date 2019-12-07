@@ -41,7 +41,8 @@ void UTankTrack::SetThrottle(float Throttle){
     //auto Name = GetName();
     //UE_LOG(LogTemp, Warning, TEXT("%f: %s Throttle: %f"), Time, *Name, Throttle);
 
-	CurrentThrottle = FMath::Clamp<float>(CurrentThrottle + Throttle, -1, 2);
+	//CurrentThrottle = FMath::Clamp<float>(CurrentThrottle + Throttle, -1, 2);
+	CurrentThrottle = CurrentThrottle + Throttle;
 }
 
 void UTankTrack::DriveTrack()
