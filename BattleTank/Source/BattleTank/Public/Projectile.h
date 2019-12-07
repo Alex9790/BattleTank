@@ -7,6 +7,7 @@
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Projectile.generated.h"
 
+class UParticleSystemComponent;
 UCLASS()
 class BATTLETANK_API AProjectile : public AActor
 {
@@ -29,4 +30,10 @@ protected:
 private:	
 	UProjectileMovementComponent* ProjectileMovement = nullptr;
 
+	//se usara para detectar cuando el projectil colisione con algo
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+	UStaticMeshComponent* CollisionMesh = nullptr;
+
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+	UParticleSystemComponent* LaunchBlast = nullptr;
 };

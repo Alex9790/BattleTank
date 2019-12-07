@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
+#include "Particles/ParticleSystemComponent.h"
 #include "Projectile.h"
 
 // Sets default values
@@ -14,6 +15,14 @@ AProjectile::AProjectile()
 	
 	//para evitar que realice movimiento hasta que realmente hayamos disparado
 	ProjectileMovement->bAutoActivate = false;
+
+	CollisionMesh = CreateDefaultSubobject<UStaticMeshComponent>(FName("Collision Mesh"));
+	SetRootComponent(CollisionMesh);
+	CollisionMesh->SetNotifyRigidBodyCollision(true);	//activar "Simulation Generates Hit Events" por defecto
+	CollisionMesh->SetVisibility(false);								//visualisar el projectile
+
+	LaunchBlast = CreateDefaultSubobject<UParticleSystemComponent>(FName("Launch Blast"));
+	LaunchBlast->AttachTo(RootComponent);	//si no me equivoco esto es para que las particulas de peguen al projectil
 }
 
 // Called when the game starts or when spawned
