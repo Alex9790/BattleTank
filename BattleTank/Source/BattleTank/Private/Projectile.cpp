@@ -63,4 +63,16 @@ void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, U
 	LaunchBlast->Deactivate();
 	ImpactBlast->Activate();
 	ExplosionForce->FireImpulse();
+
+	//destruye el mesh al hacer colision, pero deja los efectos d particulas
+	SetRootComponent(ImpactBlast);
+	CollisionMesh->DestroyComponent();
+
+	//para eliminar todo el Actor despues de un tiempo limite
+	FTimerHandle Timer;
+	GetWorld()->GetTimerManager().SetTimer(Timer, this, &AProjectile::OnTimerExpire, DestroyDelay, false);
+}
+
+void AProjectile::OnTimerExpire() {
+	Destroy();
 }
