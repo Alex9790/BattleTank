@@ -14,6 +14,21 @@ ATank::ATank()
 	UE_LOG(LogTemp, Warning, TEXT("Constructor - TankName = %s"), *TankName)
 }
 
+float ATank::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
+{
+	int32 DamagePoints = FPlatformMath::RoundToInt(DamageAmount);
+	int32 DamageToApply = FMath::Clamp(DamagePoints, 0, CurrentHealth);
+
+	//UE_LOG(LogTemp, Warning, TEXT("DamageAmount=%f - DamagePoints=%i - DamageToApply=%i"), DamageAmount, DamagePoints, DamageToApply)
+
+	CurrentHealth -= DamageToApply;
+	if(CurrentHealth <= 0){
+		UE_LOG(LogTemp, Warning, TEXT("Tank's Dead"))
+	}
+
+	return DamageToApply;
+}
+
 // Called when the game starts or when spawned
 void ATank::BeginPlay()
 {

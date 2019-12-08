@@ -3,6 +3,8 @@
 
 #include "Particles/ParticleSystemComponent.h"
 #include "PhysicsEngine/RadialForceComponent.h"
+#include "Kismet/GameplayStatics.h"
+#include "GameFramework/DamageType.h"
 #include "Projectile.h"
 
 // Sets default values
@@ -67,6 +69,15 @@ void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, U
 	//destruye el mesh al hacer colision, pero deja los efectos d particulas
 	SetRootComponent(ImpactBlast);
 	CollisionMesh->DestroyComponent();
+
+	UGameplayStatics::ApplyRadialDamage(
+		this,						//contexto
+		ProjectileDamage,			//daño producido
+		GetActorLocation(),			//origen del daño producido
+		ExplosionForce->Radius,		//Radio del daño ocacionado
+		UDamageType::StaticClass(),
+		TArray<AActor*>()			//Arreglo de Actors que recibiran este daño, si esta vacio daña a todos los actores
+	);
 
 	//para eliminar todo el Actor despues de un tiempo limite
 	FTimerHandle Timer;

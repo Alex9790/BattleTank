@@ -52,4 +52,8 @@ private:
 	//tiempo de vida del proyectil
 	UPROPERTY(EditDefaultsOnly, category = "Setup")
 	float DestroyDelay = 10.f;
+
+	//tiempo de vida del proyectil
+	UPROPERTY(EditDefaultsOnly, category = "Setup")
+	float ProjectileDamage = 20.f;
 };

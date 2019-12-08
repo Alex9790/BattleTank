@@ -25,6 +25,16 @@ public:
 	// Sets default values for this pawn's properties
 	ATank();
 
+	//metodo llamado por el Engine cuando el Actor recibe daño
+	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
+
 private:
+
+	//vida del tanque
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+	int32 StartingHealth = 100.f;
+
+	UPROPERTY(VisibleAnywhere, Category = "Health")
+	int32 CurrentHealth = StartingHealth;	//se define como entero para evitar lidiar con valores cercanos a 0
 
 };
