@@ -8,7 +8,7 @@
 AProjectile::AProjectile()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 
 	//definir componente heredado
 	ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(FName("Projectile Movement"));
@@ -22,14 +22,19 @@ AProjectile::AProjectile()
 	CollisionMesh->SetVisibility(false);								//visualisar el projectile
 
 	LaunchBlast = CreateDefaultSubobject<UParticleSystemComponent>(FName("Launch Blast"));
-	LaunchBlast->AttachTo(RootComponent);	//si no me equivoco esto es para que las particulas de peguen al projectil
+	//LaunchBlast->AttachTo(RootComponent);	//si no me equivoco esto es para que las particulas de peguen al projectil
+	LaunchBlast->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
+	
+	ImpactBlast = CreateDefaultSubobject<UParticleSystemComponent>(FName("Impact Blast"));
+	ImpactBlast->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
+	ImpactBlast->bAutoActivate=false;
 }
 
 // Called when the game starts or when spawned
 void AProjectile::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	CollisionMesh->OnComponentHit.AddDynamic(this, &AProjectile::OnHit); //AProjectile no es un Component, pero CollisionMesh si
 }
 
 // Called every frame
@@ -47,4 +52,10 @@ void AProjectile::LaunchProjectile(float Speed){
 	ProjectileMovement->SetVelocityInLocalSpace(FVector::ForwardVector * Speed);
 	//se activa el movimiento del actor
 	ProjectileMovement->Activate();
+}
+
+void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit) {
+	//UE_LOG(LogTemp, Warning, TEXT("Hit"));
+	LaunchBlast->Deactivate();
+	ImpactBlast->Activate();
 }
