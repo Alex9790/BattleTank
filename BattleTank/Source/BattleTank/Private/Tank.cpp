@@ -42,6 +42,8 @@ void ATank::BeginPlay()
 	
 	auto TankName = GetName();
 	UE_LOG(LogTemp, Warning, TEXT("BeginPlay - TankName = %s"), *TankName)
+
+	CurrentHealth = StartingHealth;
 }
 
 // Called every frame

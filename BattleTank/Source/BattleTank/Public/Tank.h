@@ -43,6 +43,6 @@ private:
 	int32 StartingHealth = 100.f;
 
 	UPROPERTY(VisibleAnywhere, Category = "Health")
-	int32 CurrentHealth = StartingHealth;	//se define como entero para evitar lidiar con valores cercanos a 0
+	int32 CurrentHealth;	//se define como entero para evitar lidiar con valores cercanos a 0
 
 };
