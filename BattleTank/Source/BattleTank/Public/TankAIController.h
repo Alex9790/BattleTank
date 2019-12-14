@@ -17,10 +17,16 @@ class BATTLETANK_API ATankAIController : public AAIController
 	public:
 		virtual void BeginPlay() override;
 
-		virtual void Tick(float DeltaTime) override;		 
+		virtual void Tick(float DeltaTime) override;
 
-protected: 
-	//que tan cerca se puede acercar el AI al jugador (en centimetros)
-	UPROPERTY(EditDefaultsOnly, Category = "Setup")
-	float AcceptanceRadius = 5000;
+		virtual void SetPawn(APawn* InPawn) override;
+
+		UFUNCTION()
+		void OnPossessedTankDeath();
+
+	protected: 
+		//que tan cerca se puede acercar el AI al jugador (en centimetros)
+		UPROPERTY(EditDefaultsOnly, Category = "Setup")
+		float AcceptanceRadius = 5000;
+
 };
