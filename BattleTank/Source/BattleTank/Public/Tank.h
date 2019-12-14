@@ -28,6 +28,10 @@ public:
 	//metodo llamado por el Engine cuando el Actor recibe daño
 	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
 
+	//Retorna Health actual como un porcentaje, desde 0 a 1
+	UFUNCTION(BlueprintPure, Category = "Health")
+	float GetHealthPercent() const;
+
 private:
 
 	//vida del tanque
