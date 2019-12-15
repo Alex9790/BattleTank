@@ -81,7 +81,7 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVec
         HitResult,
         StartLocation,
         EndLocation,
-        ECollisionChannel::ECC_Visibility       //colisionara con todo lo que se vea
+        ECollisionChannel::ECC_Camera       //colisionara con todo lo que se vea
     ))
     {
         HitLocation = HitResult.Location;   //se obtiene del FHitResult la ubicacion en mundo donde ocurrio la colision
