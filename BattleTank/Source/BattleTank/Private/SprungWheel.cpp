@@ -10,14 +10,15 @@ ASprungWheel::ASprungWheel()
 	PrimaryActorTick.bCanEverTick = true;
 
 	//inherited Components
+	MassWheelConstraint = CreateDefaultSubobject<UPhysicsConstraintComponent>(FName("MassWheelConstraint"));
+	SetRootComponent(MassWheelConstraint);
+
 	Mass = CreateDefaultSubobject<UStaticMeshComponent>(FName("Mass"));
-	SetRootComponent(Mass);
+	Mass->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 
 	Wheel = CreateDefaultSubobject<UStaticMeshComponent>(FName("Wheel"));
 	Wheel->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 
-	MassWheelConstraint = CreateDefaultSubobject<UPhysicsConstraintComponent>(FName("MassWheelConstraint"));
-	MassWheelConstraint->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 }
 
 // Called when the game starts or when spawned
